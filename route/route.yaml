@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: my-app-integration-external # kpt-set: ${component}-${deployment}-${type}
+  namespace: my-app-ns
+spec:
+  gateways:
+    - external # kpt-set: ${type}
+  hosts:
+    - my-app-integration.example.com.nz # kpt-set: ${component}-${deployment}.${domain}
+  http:
+    - timeout: 30s
+      route:
+        - weight: 100
+          destination:
+            host: my-app # kpt-set: ${upstream}

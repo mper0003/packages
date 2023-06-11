@@ -2,11 +2,15 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: create-setters-fn-config
-  namespace: my-app
+  namespace: my-app-ns
 data:
-  namespace: my-app
+  namespace: my-app-ns
+  component: my-app
   repo: deployment
   project: my-system
   region: apse2
   tier: development
   deployment: integration
+  domain: example.com.nz
+  type: external
+  upstream: my-app.mesh-external.com

@@ -2,16 +2,16 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: application
-  namespace: example
+  namespace: my-applications
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   source:
-    path: .tai/development/apse2/integration # kpt-set: ${sync-path}
+    path: .tai/development/apse2/integration/resource-*/ # kpt-set: .tai/${tier}/${region}/${deployment}/resource-*/
     repoURL: https://github.com/mper0003/deployment # kpt-set: https://github.com/mper0003/${repo}
     targetRevision: HEAD
   destination:
-    namespace: example
+    namespace: my-app # kpt-set: ${namespace}
     server: https://kubernetes.default.svc
   project: my-system # kpt-set: ${project}
   syncPolicy:

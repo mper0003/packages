@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: my-app-external-service # kpt-set: ${component}-external-service
+  namespace: example
+spec:
+  hosts:
+    - my-app.mesh-external.com # kpt-set: ${upstream}
+  resolution: DNS
+  ports:
+    - number: 80
+      protocol: HTTP
+      name: http-80
+  location: MESH_EXTERNAL

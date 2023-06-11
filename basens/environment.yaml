@@ -1,13 +1,13 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: mper0003
+  name: my-app-ns # kpt-set: ${namespace}
 ---
 kind: LimitRange
 apiVersion: v1
 metadata:
   name: defaults-limit-range
-  namespace: mper0003
+  namespace: my-app-ns
 spec:
   limits:
     - default:
@@ -22,7 +22,7 @@ kind: ResourceQuota
 apiVersion: v1
 metadata:
   name: pod-limits
-  namespace: mper0003
+  namespace: my-app-ns
 spec:
   hard:
     limits.cpu: "10"
