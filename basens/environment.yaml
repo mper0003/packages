@@ -1,0 +1,30 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: mper0003
+---
+kind: LimitRange
+apiVersion: v1
+metadata:
+  name: defaults-limit-range
+  namespace: mper0003
+spec:
+  limits:
+    - default:
+        cpu: "0.5"
+        memory: 1Gi
+      defaultRequest:
+        cpu: "0.2"
+        memory: 256Mi
+      type: Container
+---
+kind: ResourceQuota
+apiVersion: v1
+metadata:
+  name: pod-limits
+  namespace: mper0003
+spec:
+  hard:
+    limits.cpu: "10"
+    limits.memory: 10Gi
+    pods: "10"
